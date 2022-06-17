@@ -23,14 +23,22 @@ export default function CreateClient () {
         phone: String(phone),
         email: email
       }
-       await api.post('/clients', data)
-      
+
+      let message;
+      const fields = ['name', 'phone', 'email'];
+      for (let field of fields) {
+        if (!data[field] || data[field] === 'Teste') {
+         message = `O campo ${field} está vazio ou o parametro está inválido !`
+         return alert(message)      
+        }
+      }
+
+      await api.post('/clients', data)
       console.log(data)
-      alert('Cadastro efetuado com sucesso');
-  
-  
-     history.push('/clients')
-  }
+      alert("Cadastro efetuado com sucesso");
+      history.push('/clients')
+
+    }
 
   return (
     <div id= "page-Create-Client"> 
